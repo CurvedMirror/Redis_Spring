@@ -1,0 +1,5 @@
+INDEX VERSION 1.122+C:\Users\Administrator\Documents\Tencent Files\1287135821\FileRecv\APPInfo\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+71424734.index
+1280023447.index
+1642019949.index
+4222992740.index

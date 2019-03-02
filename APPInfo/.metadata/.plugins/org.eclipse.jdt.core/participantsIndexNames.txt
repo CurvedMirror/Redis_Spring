@@ -1,0 +1,3 @@
+INDEX VERSION 1.126
+C:\Users\Administrator\Documents\Tencent Files\1287135821\FileRecv\APPInfo\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3870819472.index
+\APPInfo\src

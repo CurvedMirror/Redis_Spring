@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.appsys.mapper.AdPromotionMapper">
+  <resultMap id="BaseResultMap" type="cn.appsys.pojo.AdPromotion">
+    <id column="adpromotion_id" jdbcType="BIGINT" property="id" />
+    <result column="adpromotion_appId" jdbcType="BIGINT" property="appid" />
+    <result column="adpromotion_adPicPath" jdbcType="VARCHAR" property="adpicpath" />
+    <result column="adpromotion_adPV" jdbcType="BIGINT" property="adpv" />
+    <result column="adpromotion_carouselPosition" jdbcType="INTEGER" property="carouselposition" />
+    <result column="adpromotion_startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="adpromotion_endTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="adpromotion_createdBy" jdbcType="BIGINT" property="createdby" />
+    <result column="adpromotion_creationDate" jdbcType="TIMESTAMP" property="creationdate" />
+    <result column="adpromotion_modifyBy" jdbcType="BIGINT" property="modifyby" />
+    <result column="adpromotion_modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    adpromotion.id as adpromotion_id, adpromotion.appId as adpromotion_appId, adpromotion.adPicPath as adpromotion_adPicPath, 
+    adpromotion.adPV as adpromotion_adPV, adpromotion.carouselPosition as adpromotion_carouselPosition, 
+    adpromotion.startTime as adpromotion_startTime, adpromotion.endTime as adpromotion_endTime, 
+    adpromotion.createdBy as adpromotion_createdBy, adpromotion.creationDate as adpromotion_creationDate, 
+    adpromotion.modifyBy as adpromotion_modifyBy, adpromotion.modifyDate as adpromotion_modifyDate
+  </sql>
+  <select id="selectByExample" parameterType="cn.appsys.pojo.AdPromotionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ad_promotion adpromotion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ad_promotion adpromotion
+    where adpromotion.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ad_promotion
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.appsys.pojo.AdPromotionExample">
+    delete from ad_promotion adpromotion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.appsys.pojo.AdPromotion">
+    insert into ad_promotion (id, appId, adPicPath, 
+      adPV, carouselPosition, startTime, 
+      endTime, createdBy, creationDate, 
+      modifyBy, modifyDate)
+    values (#{id,jdbcType=BIGINT}, #{appid,jdbcType=BIGINT}, #{adpicpath,jdbcType=VARCHAR}, 
+      #{adpv,jdbcType=BIGINT}, #{carouselposition,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{createdby,jdbcType=BIGINT}, #{creationdate,jdbcType=TIMESTAMP}, 
+      #{modifyby,jdbcType=BIGINT}, #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.appsys.pojo.AdPromotion">
+    insert into ad_promotion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="appid != null">
+        appId,
+      </if>
+      <if test="adpicpath != null">
+        adPicPath,
+      </if>
+      <if test="adpv != null">
+        adPV,
+      </if>
+      <if test="carouselposition != null">
+        carouselPosition,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+      <if test="createdby != null">
+        createdBy,
+      </if>
+      <if test="creationdate != null">
+        creationDate,
+      </if>
+      <if test="modifyby != null">
+        modifyBy,
+      </if>
+      <if test="modifydate != null">
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=BIGINT},
+      </if>
+      <if test="adpicpath != null">
+        #{adpicpath,jdbcType=VARCHAR},
+      </if>
+      <if test="adpv != null">
+        #{adpv,jdbcType=BIGINT},
+      </if>
+      <if test="carouselposition != null">
+        #{carouselposition,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdby != null">
+        #{createdby,jdbcType=BIGINT},
+      </if>
+      <if test="creationdate != null">
+        #{creationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyby != null">
+        #{modifyby,jdbcType=BIGINT},
+      </if>
+      <if test="modifydate != null">
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.appsys.pojo.AdPromotionExample" resultType="java.lang.Long">
+    select count(*) from ad_promotion adpromotion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ad_promotion adpromotion
+    <set>
+      <if test="record.id != null">
+        adpromotion.id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.appid != null">
+        adpromotion.appId = #{record.appid,jdbcType=BIGINT},
+      </if>
+      <if test="record.adpicpath != null">
+        adpromotion.adPicPath = #{record.adpicpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adpv != null">
+        adpromotion.adPV = #{record.adpv,jdbcType=BIGINT},
+      </if>
+      <if test="record.carouselposition != null">
+        adpromotion.carouselPosition = #{record.carouselposition,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null">
+        adpromotion.startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        adpromotion.endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdby != null">
+        adpromotion.createdBy = #{record.createdby,jdbcType=BIGINT},
+      </if>
+      <if test="record.creationdate != null">
+        adpromotion.creationDate = #{record.creationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyby != null">
+        adpromotion.modifyBy = #{record.modifyby,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifydate != null">
+        adpromotion.modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ad_promotion adpromotion
+    set adpromotion.id = #{record.id,jdbcType=BIGINT},
+      adpromotion.appId = #{record.appid,jdbcType=BIGINT},
+      adpromotion.adPicPath = #{record.adpicpath,jdbcType=VARCHAR},
+      adpromotion.adPV = #{record.adpv,jdbcType=BIGINT},
+      adpromotion.carouselPosition = #{record.carouselposition,jdbcType=INTEGER},
+      adpromotion.startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      adpromotion.endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      adpromotion.createdBy = #{record.createdby,jdbcType=BIGINT},
+      adpromotion.creationDate = #{record.creationdate,jdbcType=TIMESTAMP},
+      adpromotion.modifyBy = #{record.modifyby,jdbcType=BIGINT},
+      adpromotion.modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.appsys.pojo.AdPromotion">
+    update ad_promotion
+    <set>
+      <if test="appid != null">
+        appId = #{appid,jdbcType=BIGINT},
+      </if>
+      <if test="adpicpath != null">
+        adPicPath = #{adpicpath,jdbcType=VARCHAR},
+      </if>
+      <if test="adpv != null">
+        adPV = #{adpv,jdbcType=BIGINT},
+      </if>
+      <if test="carouselposition != null">
+        carouselPosition = #{carouselposition,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdby != null">
+        createdBy = #{createdby,jdbcType=BIGINT},
+      </if>
+      <if test="creationdate != null">
+        creationDate = #{creationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyby != null">
+        modifyBy = #{modifyby,jdbcType=BIGINT},
+      </if>
+      <if test="modifydate != null">
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.appsys.pojo.AdPromotion">
+    update ad_promotion
+    set appId = #{appid,jdbcType=BIGINT},
+      adPicPath = #{adpicpath,jdbcType=VARCHAR},
+      adPV = #{adpv,jdbcType=BIGINT},
+      carouselPosition = #{carouselposition,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      createdBy = #{createdby,jdbcType=BIGINT},
+      creationDate = #{creationdate,jdbcType=TIMESTAMP},
+      modifyBy = #{modifyby,jdbcType=BIGINT},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="cn.appsys.pojo.AdPromotion">
+    <id column="adpromotion_id" jdbcType="BIGINT" property="id" />
+    <result column="adpromotion_appId" jdbcType="BIGINT" property="appid" />
+    <result column="adpromotion_adPicPath" jdbcType="VARCHAR" property="adpicpath" />
+    <result column="adpromotion_adPV" jdbcType="BIGINT" property="adpv" />
+    <result column="adpromotion_carouselPosition" jdbcType="INTEGER" property="carouselposition" />
+    <result column="adpromotion_startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="adpromotion_endTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="adpromotion_createdBy" jdbcType="BIGINT" property="createdby" />
+    <result column="adpromotion_creationDate" jdbcType="TIMESTAMP" property="creationdate" />
+    <result column="adpromotion_modifyBy" jdbcType="BIGINT" property="modifyby" />
+    <result column="adpromotion_modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    adpromotion.id as adpromotion_id, adpromotion.appId as adpromotion_appId, adpromotion.adPicPath as adpromotion_adPicPath, 
+    adpromotion.adPV as adpromotion_adPV, adpromotion.carouselPosition as adpromotion_carouselPosition, 
+    adpromotion.startTime as adpromotion_startTime, adpromotion.endTime as adpromotion_endTime, 
+    adpromotion.createdBy as adpromotion_createdBy, adpromotion.creationDate as adpromotion_creationDate, 
+    adpromotion.modifyBy as adpromotion_modifyBy, adpromotion.modifyDate as adpromotion_modifyDate
+  </sql>
+  <select id="selectByExample" parameterType="cn.appsys.pojo.AdPromotionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ad_promotion adpromotion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ad_promotion adpromotion
+    where adpromotion.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ad_promotion
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.appsys.pojo.AdPromotionExample">
+    delete from ad_promotion adpromotion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.appsys.pojo.AdPromotion">
+    insert into ad_promotion (id, appId, adPicPath, 
+      adPV, carouselPosition, startTime, 
+      endTime, createdBy, creationDate, 
+      modifyBy, modifyDate)
+    values (#{id,jdbcType=BIGINT}, #{appid,jdbcType=BIGINT}, #{adpicpath,jdbcType=VARCHAR}, 
+      #{adpv,jdbcType=BIGINT}, #{carouselposition,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{createdby,jdbcType=BIGINT}, #{creationdate,jdbcType=TIMESTAMP}, 
+      #{modifyby,jdbcType=BIGINT}, #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.appsys.pojo.AdPromotion">
+    insert into ad_promotion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="appid != null">
+        appId,
+      </if>
+      <if test="adpicpath != null">
+        adPicPath,
+      </if>
+      <if test="adpv != null">
+        adPV,
+      </if>
+      <if test="carouselposition != null">
+        carouselPosition,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+      <if test="createdby != null">
+        createdBy,
+      </if>
+      <if test="creationdate != null">
+        creationDate,
+      </if>
+      <if test="modifyby != null">
+        modifyBy,
+      </if>
+      <if test="modifydate != null">
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=BIGINT},
+      </if>
+      <if test="adpicpath != null">
+        #{adpicpath,jdbcType=VARCHAR},
+      </if>
+      <if test="adpv != null">
+        #{adpv,jdbcType=BIGINT},
+      </if>
+      <if test="carouselposition != null">
+        #{carouselposition,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdby != null">
+        #{createdby,jdbcType=BIGINT},
+      </if>
+      <if test="creationdate != null">
+        #{creationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyby != null">
+        #{modifyby,jdbcType=BIGINT},
+      </if>
+      <if test="modifydate != null">
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.appsys.pojo.AdPromotionExample" resultType="java.lang.Long">
+    select count(*) from ad_promotion adpromotion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ad_promotion adpromotion
+    <set>
+      <if test="record.id != null">
+        adpromotion.id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.appid != null">
+        adpromotion.appId = #{record.appid,jdbcType=BIGINT},
+      </if>
+      <if test="record.adpicpath != null">
+        adpromotion.adPicPath = #{record.adpicpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adpv != null">
+        adpromotion.adPV = #{record.adpv,jdbcType=BIGINT},
+      </if>
+      <if test="record.carouselposition != null">
+        adpromotion.carouselPosition = #{record.carouselposition,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null">
+        adpromotion.startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        adpromotion.endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdby != null">
+        adpromotion.createdBy = #{record.createdby,jdbcType=BIGINT},
+      </if>
+      <if test="record.creationdate != null">
+        adpromotion.creationDate = #{record.creationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyby != null">
+        adpromotion.modifyBy = #{record.modifyby,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifydate != null">
+        adpromotion.modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ad_promotion adpromotion
+    set adpromotion.id = #{record.id,jdbcType=BIGINT},
+      adpromotion.appId = #{record.appid,jdbcType=BIGINT},
+      adpromotion.adPicPath = #{record.adpicpath,jdbcType=VARCHAR},
+      adpromotion.adPV = #{record.adpv,jdbcType=BIGINT},
+      adpromotion.carouselPosition = #{record.carouselposition,jdbcType=INTEGER},
+      adpromotion.startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      adpromotion.endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      adpromotion.createdBy = #{record.createdby,jdbcType=BIGINT},
+      adpromotion.creationDate = #{record.creationdate,jdbcType=TIMESTAMP},
+      adpromotion.modifyBy = #{record.modifyby,jdbcType=BIGINT},
+      adpromotion.modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.appsys.pojo.AdPromotion">
+    update ad_promotion
+    <set>
+      <if test="appid != null">
+        appId = #{appid,jdbcType=BIGINT},
+      </if>
+      <if test="adpicpath != null">
+        adPicPath = #{adpicpath,jdbcType=VARCHAR},
+      </if>
+      <if test="adpv != null">
+        adPV = #{adpv,jdbcType=BIGINT},
+      </if>
+      <if test="carouselposition != null">
+        carouselPosition = #{carouselposition,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdby != null">
+        createdBy = #{createdby,jdbcType=BIGINT},
+      </if>
+      <if test="creationdate != null">
+        creationDate = #{creationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyby != null">
+        modifyBy = #{modifyby,jdbcType=BIGINT},
+      </if>
+      <if test="modifydate != null">
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.appsys.pojo.AdPromotion">
+    update ad_promotion
+    set appId = #{appid,jdbcType=BIGINT},
+      adPicPath = #{adpicpath,jdbcType=VARCHAR},
+      adPV = #{adpv,jdbcType=BIGINT},
+      carouselPosition = #{carouselposition,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      createdBy = #{createdby,jdbcType=BIGINT},
+      creationDate = #{creationdate,jdbcType=TIMESTAMP},
+      modifyBy = #{modifyby,jdbcType=BIGINT},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
